@@ -4,27 +4,6 @@ import PackageDescription
 
 let buildTests = false
 
-extension Product {
-  static func allTests() -> [Product] {
-    if buildTests {
-      return [.executable(name: "AllTestz", targets: ["AllTestz"])]
-    } else {
-      return []
-    }
-  }
-}
-
-extension Target {
-
-  static func allTests() -> [Target] {
-    if buildTests {
-      return [.target(name: "AllTestz", dependencies: ["RxSwift"])]
-    } else {
-      return []
-    }
-  }
-}
-
 let package = Package(
   name: "RxSwift",
   platforms: [
@@ -40,7 +19,6 @@ let package = Package(
     [
       .target(name: "RxSwift", dependencies: []),
     ], 
-    Target.allTests()
   ] as [[Target]]).flatMap { $0 },
   swiftLanguageVersions: [.v5]
 )
