@@ -12,8 +12,7 @@ let package = Package(
   products: ([
     [
       .library(name: "RxSwift", targets: ["RxSwift"])
-    ],
-    Product.allTests()
+    ]
   ] as [[Product]]).flatMap { $0 },
   targets: ([
     [
