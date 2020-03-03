@@ -16,7 +16,7 @@ let package = Package(
   ] as [[Product]]).flatMap { $0 },
   targets: ([
     [
-      .target(name: "RxSwift", dependencies: ["RxCocoa"]),
+      .target(name: "RxSwift", dependencies: []),
     ], 
   ] as [[Target]]).flatMap { $0 },
   swiftLanguageVersions: [.v5]
