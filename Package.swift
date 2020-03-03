@@ -15,25 +15,10 @@ extension Product {
 }
 
 extension Target {
-  static func rxCocoa() -> [Target] {
-    #if os(Linux)
-      return [.target(name: "RxCocoa", dependencies: ["RxSwift", "RxRelay"])]
-    #else
-      return [.target(name: "RxCocoa", dependencies: ["RxSwift", "RxRelay", "RxCocoaRuntime"])]
-    #endif
-  }
-
-  static func rxCocoaRuntime() -> [Target] {
-    #if os(Linux)
-      return []
-    #else
-      return [.target(name: "RxCocoaRuntime", dependencies: ["RxSwift"])]
-    #endif
-  }
 
   static func allTests() -> [Target] {
     if buildTests {
-      return [.target(name: "AllTestz", dependencies: ["RxSwift", "RxCocoa", "RxBlocking", "RxTest"])]
+      return [.target(name: "AllTestz", dependencies: ["RxSwift"])]
     } else {
       return []
     }
@@ -47,11 +32,7 @@ let package = Package(
   ],
   products: ([
     [
-      .library(name: "RxSwift", targets: ["RxSwift"]),
-      .library(name: "RxCocoa", targets: ["RxCocoa"]),
-      .library(name: "RxRelay", targets: ["RxRelay"]),
-      .library(name: "RxBlocking", targets: ["RxBlocking"]),
-      .library(name: "RxTest", targets: ["RxTest"]),
+      .library(name: "RxSwift", targets: ["RxSwift"])
     ],
     Product.allTests()
   ] as [[Product]]).flatMap { $0 },
@@ -59,13 +40,6 @@ let package = Package(
     [
       .target(name: "RxSwift", dependencies: []),
     ], 
-    Target.rxCocoa(),
-    Target.rxCocoaRuntime(),
-    [
-      .target(name: "RxRelay", dependencies: ["RxSwift"]),
-      .target(name: "RxBlocking", dependencies: ["RxSwift"]),
-      .target(name: "RxTest", dependencies: ["RxSwift"]),
-    ],
     Target.allTests()
   ] as [[Target]]).flatMap { $0 },
   swiftLanguageVersions: [.v5]
